@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   test_ft_memcpy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgiraud <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/24 14:08:58 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/09/25 12:35:51 by kgiraud          ###   ########.fr       */
+/*   Created: 2024/09/25 11:37:23 by kgiraud           #+#    #+#             */
+/*   Updated: 2024/09/25 12:29:58 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <string.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
+
+int main(void)
 {
-	size_t			i;
-	unsigned char	*p;
+	char dst[] = "123456";
+	char src[] = "456";
+	size_t n = 3;
+	ft_memcpy(dst, src, n);
+	printf("%s \n", dst);
 
-	i = 0;
-	p = (unsigned char *)b;
-	while (i < len)
-		p[i++] = (unsigned char)c;
-	return (p);
+	char dst2[] = "123456";
+	char src2[] = "456";
+	memcpy(dst2, src2, n);
+	printf("%s \n", dst2);
+	return (0);
 }
