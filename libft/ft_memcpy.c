@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiraud <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: studio <studio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 12:13:14 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/09/25 12:35:19 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:52:56 by studio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,21 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	}
 	return (dst);
 }
+
+/*#include <stdio.h>
+#include <string.h>
+
+int main(void)
+{
+	char dst[] = "123456";
+	char src[] = "456";
+	size_t n = 3;
+	ft_memcpy(dst, src, n);
+	printf("ma fonction : %s \n", dst);
+
+	char dst2[] = "123456";
+	char src2[] = "456";
+	memcpy(dst2, src2, n);
+	printf("la vrai fonction : %s \n", dst2);
+	return (0);
+}*/
