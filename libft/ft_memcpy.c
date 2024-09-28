@@ -6,7 +6,7 @@
 /*   By: studio <studio@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 12:13:14 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/09/26 17:37:58 by studio           ###   ########.fr       */
+/*   Updated: 2024/09/28 16:46:58 by studio           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	return (dst);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 #include <string.h>
 
 int main(void)
@@ -44,4 +44,4 @@ int main(void)
 	char src2[] = "123";
 	memcpy(dst2, src2, n);
 	printf("la vrai fonction : %s \n", dst2);
-}
+}*/
