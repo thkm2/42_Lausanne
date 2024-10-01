@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 19:50:03 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/01 21:29:10 by kgiraud          ###   ########.fr       */
+/*   Created: 2024/10/01 20:52:14 by kgiraud           #+#    #+#             */
+/*   Updated: 2024/10/01 21:30:12 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
+	unsigned char *str1;
+	unsigned char *str2;
 
 	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	if (n == 0)
 		return (0);
-	while (s1[i] && s2[i] && i < n)
+	while (i < n)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
 	if (i == n)
 		i -= 1;
-	return (s1[i] - s2[i]);
+	return (str1[i] - str2[i]);
 }
 
 /*#include <stdio.h>
@@ -38,7 +42,7 @@ int main(int ac, char **av)
 {
 	if (ac != 4)
 		return (0);
-	printf("ma fonction : %d \n", ft_strncmp(av[1], av[2], (size_t)atoi(av[3])));
-	printf("la vraie : %d \n", strncmp(av[1], av[2], (size_t)atoi(av[3])));
+	printf("ma fonction : %d \n", ft_memcmp(av[1], av[2], atoi(av[3])));
+	printf("la vraie : %d \n", memcmp(av[1], av[2], atoi(av[3])));
 	return (0);
 }*/
