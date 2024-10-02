@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:51:31 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/09/29 14:51:36 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/02 19:19:35 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	i = 0;
 	dest = (unsigned char *)dst;
 	source = (unsigned char *)src;
-	if (source < dest && source + len > dest)
+	if (source < dest)
 	{
 		while (len > 0)
 		{
@@ -47,12 +47,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 int main(void)
 {
 	char src[] = "123456789";
-	size_t n = 4;
-	char *o = ft_memmove(src + 2, src, n);
+	size_t n = 1;
+	char *o = ft_memmove(src + 4, src, n);
 	printf("ma fonction : %s \n", o);
 
 	char src2[] = "123456789";
-	char *o2 = memmove(src + 2, src2, n);
+	char *o2 = memmove(src + 4, src2, n);
 	printf("la vrai fonction : %s \n", o2);
 	return (0);
 }*/
