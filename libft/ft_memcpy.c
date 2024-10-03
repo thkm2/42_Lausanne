@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 12:13:14 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/09/29 14:50:46 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:45:03 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	dest = (unsigned char *)dst;
 	source = (unsigned char *)src;
 	i = 0;
+	if (!dest && !src)
+		return (NULL);
 	while (i < n)
 	{
 		dest[i] = source[i];

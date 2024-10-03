@@ -6,7 +6,7 @@
 /*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:51:31 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/02 19:19:35 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/03 19:00:52 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	i = 0;
 	dest = (unsigned char *)dst;
 	source = (unsigned char *)src;
+	if (!dest && !src)
+		return (NULL);
 	if (source < dest)
 	{
-		while (len > 0)
-		{
-			len--;
+		while (len-- > 0)
 			dest[len] = source[len];
-		}
 	}
 	else
 	{

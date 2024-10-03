@@ -6,7 +6,7 @@
 #    By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 17:23:42 by kgiraud           #+#    #+#              #
-#    Updated: 2024/10/03 17:28:40 by kgiraud          ###   ########.fr        #
+#    Updated: 2024/10/03 17:41:47 by kgiraud          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,4 +38,4 @@ fclean:			clean
 
 re:				fclean $(NAME)
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re

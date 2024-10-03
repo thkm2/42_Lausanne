@@ -3,47 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:49:12 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/03 10:21:39 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/03 20:47:33 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 
-int	ft_real_lenght(char s1, int *h)
+int	ft_is_set(char const c, char const *set)
 {
-	if (h[s1 + 0] != 1)
-		return (1);
+	int	i;
+
+	i = 0;
+	while (set[i] != '\0')
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_move(char *s1, char *set, int size, int choice)
+{
+	int	i;
+
+	i = 0;
+	if (choice == 0)
+	{
+		while (s1[i])
+		{
+			if (ft_is_set(s1[i], set) == 1)
+				i++;
+			else
+				return (i);
+		}
+	}
+	else if (choice == 1)
+	{
+		while (size > 0)
+		{
+			if (ft_is_set(s1[size - 1], set) == 1)
+				size--;
+			else
+				return (size);
+		}
+	}
 	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		h[256];
+	int		start;
+	int		end;
 	int		i;
-	int		j;
 	char	*ret;
 
+	if (!s1 || !set)
+		return (NULL);
+	end = 0;
 	i = 0;
-	j = 0;
-	ft_memset(h, 0, 256);
-	while (set[i])
-		h[set[i++] + 0] = 1;
-	i = -1;
-	while (s1[++i])
-		j += ft_real_lenght(s1[i], h);
-	ret = (char *)malloc(sizeof(char) * (j + 1));
+	while (s1[end])
+		end++;
+	start = ft_move((char *)s1, (char *)set, end, 0);
+	end = ft_move((char *)s1, (char *)set, end, 1);
+	ret = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!ret)
 		return (NULL);
-	i += 1;
-	while (--i >= 0)
-	{
-		if (h[s1[i] + 0] != 1)
-			ret[j--] = s1[i];
-	}
+	while (start < end)
+		ret[i++] = s1[start++];
+	ret[i] = '\0';
 	return (ret);
 }
 

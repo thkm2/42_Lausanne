@@ -6,7 +6,7 @@
 /*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:10:33 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/02 15:48:59 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/03 18:11:11 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (s[i])
 		i++;
 	if (start >= i)
-		return (NULL);
+	{
+		ret = (char *)malloc(sizeof(char) * (1));
+		ret[0] = '\0';
+		return (ret);
+	}
 	if (len > i - start)
 		len = i - start;
 	i = 0;
