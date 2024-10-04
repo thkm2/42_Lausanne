@@ -6,7 +6,7 @@
 /*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:24 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/04 11:16:29 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/04 19:28:46 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned	int, char))
 	i = 0;
 	if (!s || !f)
 		return (NULL);
-	while (s[i++])
+	while (s[i])
+		i++;
 	ret = (char *)malloc(sizeof(char) * (i + 1));
 	if (!ret)
 		return (NULL);
