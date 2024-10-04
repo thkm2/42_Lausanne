@@ -6,7 +6,7 @@
 /*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:22:08 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/03 12:27:59 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/04 11:35:33 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	ft_str_to_strs(char const *s, char c, char **tab, int substring_count)
 
 char	**ft_split(char const *s, char c)
 {
+	if (!s)
+		return (NULL);
 	int		substring_count;
 	char	**tab;
 
@@ -86,6 +88,7 @@ char	**ft_split(char const *s, char c)
 	tab = (char **)malloc(sizeof(char *) * (substring_count + 1));
 	if (!tab)
 		return (NULL);
+	tab[substring_count] = NULL;
 	ft_str_to_strs(s, c, tab, substring_count);
 	return (tab);
 }
