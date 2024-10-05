@@ -6,11 +6,11 @@
 /*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:54:33 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/03 13:48:42 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/05 09:35:34 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 unsigned int	ft_int_len(int n)
 {
