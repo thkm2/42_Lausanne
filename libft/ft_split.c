@@ -6,7 +6,7 @@
 /*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:22:08 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/06 20:50:41 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/06 22:05:26 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,7 @@ char	**ft_split(char const *s, char c)
 	if (!tab)
 		return (NULL);
 	if (!ft_star_to_stars(tab, s, c, nb_w))
-	{
-		ft_free(tab, nb_w);
 		return (NULL);
-	}
 	tab[nb_w] = NULL;
 	return (tab);
 }
