@@ -3,93 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiraud <kgiraud@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kgiraud <kgiraud@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:22:08 by kgiraud           #+#    #+#             */
-/*   Updated: 2024/10/05 18:57:21 by kgiraud          ###   ########.fr       */
+/*   Updated: 2024/10/06 20:50:41 by kgiraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_how_many_substring(char const *s, char c)
+int	ft_count_words(char const *s, char c)
 {
-	int	count;
-	int	in_substring;
+	int	nb_w;
+	int	in_words;
 
-	count = 0;
-	in_substring = 0;
+	nb_w = 0;
+	in_words = 0;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s != c && in_words == 0)
 		{
-			if (in_substring == 0)
-			{
-				in_substring = 1;
-				count++;
-			}
+			in_words = 1;
+			nb_w++;
 		}
-		else
-			in_substring = 0;
+		else if (*s == c)
+			in_words = 0;
 		s++;
 	}
-	return (count);
+	return (nb_w);
 }
 
-int	ft_find_substring_index(char const *s, char c)
+int	ft_count_char(char const *s, char c)
 {
-	int	i;
+	int	nb_c;
 
-	i = 0;
-	while (s[i])
+	nb_c = 0;
+	while (*s && *s == c)
+		s++;
+	while (*s && *s != c)
 	{
-		if (s[i] != c)
-			return (i);
-		i++;
+		nb_c++;
+		s++;
 	}
-	return (i);
+	return (nb_c);
 }
 
-void	ft_str_to_strs(char const *s, char c, char **tab, int substring_count)
+void	ft_free(char **tab, int nb_w)
 {
 	int	i;
-	int	len;
-	int	substring;
 
 	i = 0;
-	substring = 0;
-	while (substring < substring_count)
+	while (i < nb_w && tab[i])
+		free(tab[i++]);
+	free(tab);
+}
+
+int	ft_star_to_stars(char **tab, char const *s, char c, int nb_w)
+{
+	int	word;
+	int	i;
+
+	word = 0;
+	while (word < nb_w)
 	{
-		len = 0;
-		i += ft_find_substring_index(s + i, c);
-		while (s[i] && s[i] != c)
+		while (*s && *s == c)
+			s++;
+		tab[word] = (char *)malloc(sizeof(char) * (ft_count_char(s, c) + 1));
+		if (!tab[word])
 		{
-			i++;
-			len++;
+			ft_free(tab, word);
+			return (0);
 		}
-		tab[substring] = (char *)malloc(sizeof(char) * (len + 1));
-		i -= len;
-		len = 0;
-		while (s[i] && s[i] != c)
-			tab[substring][len++] = s[i++];
-		tab[substring][len] = '\0';
-		substring++;
+		i = 0;
+		while (*s && *s != c)
+		{
+			tab[word][i++] = *s;
+			s++;
+		}
+		tab[word][i] = '\0';
+		word++;
 	}
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		substring_count;
 	char	**tab;
+	int		nb_w;
 
 	if (!s)
 		return (NULL);
-	substring_count = ft_how_many_substring(s, c);
-	tab = (char **)malloc(sizeof(char *) * (substring_count + 1));
+	nb_w = ft_count_words(s, c);
+	tab = (char **)malloc(sizeof(char *) * (nb_w + 1));
 	if (!tab)
 		return (NULL);
-	tab[substring_count] = NULL;
-	ft_str_to_strs(s, c, tab, substring_count);
+	if (!ft_star_to_stars(tab, s, c, nb_w))
+	{
+		ft_free(tab, nb_w);
+		return (NULL);
+	}
+	tab[nb_w] = NULL;
 	return (tab);
 }
 
@@ -101,7 +114,7 @@ int main(int ac, char **av)
 		return (0);
 	char **tab = ft_split(av[1], av[2][0]);
 	int i = 0;
-	int count = ft_how_many_substring(av[1], av[2][0]);
+	int count = ft_count_words(av[1], av[2][0]);
 	while (i < count)
 		printf("%s \n", tab[i++]);
 	return (0);
