@@ -1,0 +1,1 @@
+"template <typename T>" se met juste avant la déclaration/définition que tu veux rendre générique (fonction, classe, méthode).
