@@ -1,0 +1,89 @@
+
+================GET================
+
+curl -i http://localhost:8080/
+
+curl -i http://localhost:8080/files/image.jpg
+
+curl -i http://localhost:8080/files/
+
+curl -i http://localhost:8080/redirect
+
+curl -i http://localhost:8080/cgi/hello.py
+
+curl -i http://localhost:8080/cgi/hello.py?name=Kim
+
+
+================POST================
+
+curl -i -X POST http://localhost:8080/upload -F "file=@my_tests/small.txt"
+
+curl -i -X POST http://localhost:8080/upload -F "file=@my_tests/image.jpg"
+
+curl -i -X POST http://localhost:8080/upload -H "Content-Type: plain/text" --data "salut"
+
+curl -i -v -X POST http://localhost:8080/upload -H "Transfer-Encoding: chunked" -F "file=@my_tests/small.txt"
+
+curl -i -v -X POST http://localhost:8080/upload/ -H "Transfer-Encoding: chunked" --data-binary @- 
+
+curl -i -v -X POST http://localhost:8080/upload/ -F "file=@my_tests/big.txt" --trace -
+(413 direct car content_length connu)
+
+curl -i -v -X POST http://localhost:8080/upload/ -H "Transfer-Encoding: chunked" -F "file=@my_tests/big.txt" --trace -
+(413 des qu'on atteint la client_max_body_size)
+
+================DELETE================
+
+curl -i -X DELETE http://localhost:8080/delete/dir
+(essaie sur dossier non vide)
+
+curl -i -X DELETE http://localhost:8080/delete/dir/delete_me.txt 
+
+curl -i -X DELETE http://localhost:8080/delete/empty_folder
+
+curl -i -X POST http://localhost:8080/upload/ -H "Content-Type: plain/text" --data "Salut je suis uun fichier qui vient d'etre upload"
+
+================ERROR================
+
+curl -i -X POST http://localhost:8080/
+(405)
+
+curl -i -X PUT http://localhost:8080/
+(405)
+
+curl -i -X POST http://localhost:8080/upload -F "file=@my_tests/big.txt"
+(413)
+
+curl -i http://localhost:8080/"$(printf '%32769s' | tr ' ' 'a')"
+(414)
+
+curl -i http://localhost:8080/ -H "X-Test: $(printf '%32769s' | tr ' ' 'a')"
+(431)
+
+curl -i http://localhost:8080/ -H "Host:"
+(400)
+
+curl -i http://localhost:8080/yapas.html
+(404)
+
+curl -i http://localhost:8080/files/forbidden.txt
+(403)
+
+================SIEGE================
+
+siege -b -t 10s http://127.0.0.1:8080/
+(GET)
+siege -b -c 255 -t 10s http://127.0.0.1:8080/
+(GET extreme)
+
+siege -b -t 10s http://127.0.0.1:8080/upload -f my_tests/small.txt
+(POST)
+
+siege -b -c 255 -t 10s http://127.0.0.1:8080/upload -f my_tests/small.txt
+(POST extreme)
+
+siege -b -t 10s http://127.0.0.1:8080/cgi/hello.py?name=Kim
+(GET cgi)
+
+siege -b -c 255 -t 10s http://127.0.0.1:8080/cgi/hello.py?name=Kim
+(GET cgi extreme)
